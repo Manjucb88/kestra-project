@@ -1,2 +1,2 @@
-#bin/bash
-aws s3 $1
+#!/bin/bash
+aws s3 mb $1
