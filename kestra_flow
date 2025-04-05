@@ -1,0 +1,23 @@
+id: kestra-demo
+namespace: amazon.product
+inputs:
+  - id: bucket_name
+    type: STRING
+
+tasks:
+  - id: create-s3
+    type: io.kestra.plugin.core.flow.WorkingDirectory
+    tasks:
+      - id: git-clone
+        type: io.kestra.plugin.git.Clone
+        url: https://github.com/Manjucb88/kestra-project.git
+        branch: main
+        username: Manjucb88
+        password: "{{secret('GH_TOKEN')}}"
+      - id: aws
+        type: io.kestra.plugin.aws.cli.AwsCLI
+        accessKeyId: "{{ secret('AWS_ACCESS_KEY_ID') }}"
+        secretKeyId: "{{ secret('AWS_SECRET_ACCESS_KEY') }}"
+        region: us-east-1
+        commands:
+          - /bin/bash create-s3.sh "{{inputs.bucket_name}}"
