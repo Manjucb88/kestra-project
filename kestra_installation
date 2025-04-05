@@ -1,0 +1,4 @@
+clink on link -https://kestra.io/docs/installation
+select docker compose with postgresqldb (depends on our use case)
+docker-compose up -d
+kestra running in localhost 8080 port
